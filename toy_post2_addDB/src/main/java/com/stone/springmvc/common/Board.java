@@ -3,15 +3,15 @@ package com.stone.springmvc.common;
 import java.util.ArrayList;
 
 public class Board {
-	long no;
+	int no;
 	String title;
 	String contents;
 
-	public long getNo() {
+	public int getNo() {
 		return no;
 	}
 
-	public void setNo(long no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 

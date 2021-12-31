@@ -1,5 +1,6 @@
 package com.stone.springmvc.presentation;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -14,10 +15,44 @@ public class PostController {
 
 	PostDAO dao = new PostDAO();
 
+	
+	//게시물 내용 등록 준비, writePost.jsp로 이동함
+	@RequestMapping("prepare")
+	ModelAndView preparePost() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("writePost");
+		return mv;
+	}
+	
+	
+	//writePost.jsp에서 작성한 내용을 DB에 저장하고 list로 forward
+	@RequestMapping("add")
+	ModelAndView addPost(Board board) {
+		
+		//게시물 저장
+		try {
+			dao.savePost(board);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("forward:/list");
+		return mv;
+	}
+	
+	
+	//DB에 있는 정보를 불러와 list출력
 	@RequestMapping("list")
 	ModelAndView printPost() {
 		//게시물 목록 dao에서 받아와서 list에 저장하기
-		List<Board> list = dao.select();
+		List<Board> list = null;
+		try {
+			list = dao.select();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -26,22 +61,19 @@ public class PostController {
 		mv.setViewName("postList");
 		return mv;
 	}
-
-	@RequestMapping("add")
-	ModelAndView addPost(Board board) {
-		
-		//게시물 저장
-		dao.savePost(board);
+	
+	//해당하는 번호를 가진 게시물의 제목과 내용을 db에서 가져오기
+	@RequestMapping("detail")
+	ModelAndView printDetail(int no) throws SQLException {
+		Board b = dao.findContents(no);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("forward:/list");
+		mv.setViewName("postDetail");
+		mv.addObject("board",b);
 		return mv;
 	}
 
-	@RequestMapping("prepare")
-	ModelAndView preparePost() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("writePost");
-		return mv;
-	}
+	
+
+	
 
 }
