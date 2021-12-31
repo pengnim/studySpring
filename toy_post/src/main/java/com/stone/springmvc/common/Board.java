@@ -1,4 +1,4 @@
-package com.stone.springmvc.presentation;
+package com.stone.springmvc.common;
 
 import java.util.ArrayList;
 
