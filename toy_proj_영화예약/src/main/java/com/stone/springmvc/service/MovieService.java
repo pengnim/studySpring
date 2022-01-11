@@ -3,39 +3,55 @@ package com.stone.springmvc.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.stone.springmvc.common.Movie;
-import com.stone.springmvc.common.Users;
+import com.stone.springmvc.common.예약정보;
 import com.stone.springmvc.dataservice.MovieDAO;
-import com.stone.springmvc.dataservice.UserDAO;
 import com.stone.springmvc.dataservice.예약정보DAO;
 
 
 public class MovieService {
 	@Autowired
-	예약정보DAO 예약dao = new 예약정보DAO();
+	private 예약정보DAO 예약dao = new 예약정보DAO();
 	@Autowired
-	UserDAO userdao = new UserDAO();
-	@Autowired
-	MovieDAO mvdao = new MovieDAO();
+	private MovieDAO mvdao = new MovieDAO();
 	
-	public void 로그인하기() {
-		
-	}
-	
-	
-	//일치하는 유저가 있으면 true, 없으면 false (간단하게하기)
-	public boolean 유저확인하기(String id, String pw) throws SQLException {
-		Users user = userdao.일치하는유저확인하기(id, pw);
-		if(user == null) return false;
-		else return true;
-	}
-	
+
 	public List<Movie> 영화목록가져오기() throws SQLException{
 		List<Movie> movies = mvdao.목록가져오기();
 		return movies;
+	}
+	
+	public List<예약정보> 예약좌석정보가져오기(String mvname){
+		List<예약정보>list = 예약dao.예약좌석정보가져오기(mvname);
+		return list;
+	}
+	
+	public List<예약정보> 예약좌석정보가져오기(){
+		List<예약정보>list = 예약dao.예약좌석정보가져오기(null);
+		return list;
+	}
+	
+	public void 예약정보저장하기(String mvname, int[] seatList) {
+		예약dao.예약정보입력(mvname, seatList);
+	}
+	
+	public void 예약취소하기(List<Integer> no) throws SQLException {
+		for(Integer n : no) {
+			예약dao.예약취소(n);
+		}
+	}
+	
+	public void 좌석업데이트하기(Map<String,Integer> movies, List<Movie> 전체영화목록) throws SQLException {
+		mvdao.잔여좌석업데이트(movies, 전체영화목록);
+	}
+	
+	public Map<String, Integer> 영화별예약좌석정보가져오기(){
+		return 예약dao.영화별예약좌석정보가져오기();
 	}
 	
 	

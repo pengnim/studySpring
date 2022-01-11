@@ -37,5 +37,17 @@ public class ManagePost {
 		//(DB)
 		return dao.findContents(no);
 	}
+	public Board prepareModiPost(int no) throws SQLException {
+		return dao.findContents(no);
+	}
+	
+	
+	public void modiPost(Board modiBoard) throws SQLException {
+		dao.changePost(modiBoard);
+	}
+	
+	public void deletePost(int no) throws SQLException {
+		dao.deletePost(no);
+	}
 			
 }

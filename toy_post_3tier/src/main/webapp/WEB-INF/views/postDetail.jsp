@@ -14,5 +14,7 @@
 내용<br>
 <textarea cols=25 rows=5 readonly><%=b.getContents() %></textarea><br>
 <a href="list">목록으로 이동</a>
+<a href="prepare_update?no=<%=b.getNo()%>">수정</a>
+<a href="delete?no=<%=b.getNo() %>">삭제</a>
 </body>
 </html>

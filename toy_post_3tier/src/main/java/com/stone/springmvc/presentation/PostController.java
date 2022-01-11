@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -65,8 +66,32 @@ public class PostController {
 		mv.addObject("board",b);
 		return mv;
 	}
+	
+	@RequestMapping("prepare_update")
+	ModelAndView prepareModiPost(int no) throws SQLException {
+		Board board = mp.prepareModiPost(no);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("게시물변경창");
+		mv.addObject("modiboard", board);
+		return mv;
+	}
 
 	
+	@RequestMapping("update")
+	ModelAndView updatePost(Board board) throws SQLException {
+		mp.modiPost(board);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("게시물변경통보창");
+		return mv;
+	}
+	
+	@RequestMapping("delete")
+	ModelAndView deletePost(int no) throws SQLException {
+		mp.deletePost(no);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("게시물삭제통보창");
+		return mv;
+	}
 
 	
 

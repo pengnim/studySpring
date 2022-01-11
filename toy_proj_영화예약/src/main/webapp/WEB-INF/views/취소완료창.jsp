@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>취소완료</title>
+<script>
+	alert("취소완료");
+	location.href = "updateseat";
+</script>
 </head>
 <body>
-<%=(String)session.getAttribute("id")%>
+
+
 </body>
 </html>

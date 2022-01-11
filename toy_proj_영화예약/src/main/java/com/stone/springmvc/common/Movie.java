@@ -2,7 +2,7 @@ package com.stone.springmvc.common;
 
 public class Movie {
 	private String mvname;
-	private int leftSeat;
+	private int remainingSeat;
 
 	public String getMvname() {
 		return mvname;
@@ -12,12 +12,12 @@ public class Movie {
 		this.mvname = mvname;
 	}
 
-	public int getLeftSeat() {
-		return leftSeat;
+	public int getRemainingSeat() {
+		return remainingSeat;
 	}
 
-	public void setLeftSeat(int leftSeat) {
-		this.leftSeat = leftSeat;
+	public void setRemainingSeat(int remainingSeat) {
+		this.remainingSeat = remainingSeat;
 	}
 
 }
