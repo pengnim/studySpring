@@ -9,4 +9,6 @@
 #### 자세한 흐름은 uml을 참조해주세요
 Link: [UML]
 
-[UML]: https://github.com/pengnim/studySpring/tree/main/toy_proj_%EC%98%81%ED%99%94%EC%98%88%EC%95%BD/doc
+[UML]: https://github.com/pengnim/studySpring/tree/main/toy_post_3tier/docu
+
+![3tier](https://user-images.githubusercontent.com/90567066/149138134-89633efa-8594-46fe-88ac-4f324aaaed1e.gif)
