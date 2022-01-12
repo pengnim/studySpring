@@ -11,6 +11,9 @@
 예약 취소 메뉴 -> 취소할 예약 선택 -> 취소 과정으로 진행합니다.
 
 #### 자세한 흐름은 uml을 참조해주세요
+Link: [UML]
+
+[UML]: https://github.com/pengnim/studySpring/tree/main/toy_proj_%EC%98%81%ED%99%94%EC%98%88%EC%95%BD/doc
 
 
 ![movie](https://user-images.githubusercontent.com/90567066/149137220-f83874d8-c607-4241-ba8b-6da4b35f6b05.gif)
