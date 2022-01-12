@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.stone.springmvc.common.Board;
@@ -42,18 +43,28 @@ public class PostController {
 	}
 	
 	
-	//DB에 있는 정보를 불러와 list출력
+	//DB에 있는 정보를 불러와 list출력 
+	//required=false :값이 안들어올수도 있음, defaultValue : 값이 안들어오면 해당 값으로 할당
 	@RequestMapping("list")
-	ModelAndView printPost() throws SQLException {
-		//게시물 목록 dao에서 받아와서 list에 저장하기
-		List<Board> list = mp.collectPost();
+	ModelAndView printPost(@RequestParam(value="pageno", required=false, defaultValue="1") int 페이지번호) throws SQLException {
 		
+		int sizePerPage = 5;
+		int lastPageNo = 페이지번호 * sizePerPage;
+		int startPageNo = lastPageNo - (sizePerPage-1);
+	
+		//게시물 목록 dao에서 받아와서 list에 저장하기
+		List<Board> list = mp.collectPost(startPageNo, sizePerPage);
+		int count = mp.countPost();
+		
+		int pages = (int) Math.ceil((double) count / (double) sizePerPage);
 		
 		ModelAndView mv = new ModelAndView();
 		
 		//list를 mv에 저장
 		mv.addObject("boards",list);
 		mv.setViewName("postList");
+		mv.addObject("lastPageNo", 페이지번호);
+		mv.addObject("pages", pages);
 		return mv;
 	}
 	

@@ -18,12 +18,17 @@ public class ManagePost {
 		//(DB)
 	}
 
-	public List<Board> collectPost() throws SQLException {
+	public List<Board> collectPost(int startPageNo, int sizePerPage) throws SQLException {
 		//(업무)
 		//현재 업무 규칙 없음
 		//(DB)
-		return dao.select();
+		return dao.select(startPageNo, sizePerPage);
 	}
+	
+	public int countPost() {
+		return dao.count();
+	}
+	
 	public void addPost(Board newBoard) throws SQLException {
 		//(업무)
 		//현재 업무 규칙 없음

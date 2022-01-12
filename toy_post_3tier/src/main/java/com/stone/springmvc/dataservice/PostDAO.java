@@ -29,10 +29,10 @@ public class PostDAO {
 					// URL
 					"root", "1234"); // USER_NAME과 PASSWORD
 
-			PreparedStatement 명령자 = con.prepareStatement("insert into board(title,contents) values(?,?)");
-			명령자.setString(1, newBoard.getTitle());
-			명령자.setString(2, newBoard.getContents());
-			명령자.executeUpdate();
+			PreparedStatement pstmt = con.prepareStatement("insert into board(title,contents) values(?,?)");
+			pstmt.setString(1, newBoard.getTitle());
+			pstmt.setString(2, newBoard.getContents());
+			pstmt.executeUpdate();
 
 			// DB조작
 			con.close();
@@ -42,7 +42,7 @@ public class PostDAO {
 	}
 
 	// db에 있는 게시물 목록 가져오기
-	public List<Board> select() throws SQLException {
+	public List<Board> select(int startPageNo, int sizePerPage) throws SQLException {
 		List<Board> list = new ArrayList<>();
 		Connection con = null;
 		try {
@@ -52,7 +52,9 @@ public class PostDAO {
 					// URL
 					"root", "1234"); // USER_NAME과 PASSWORD
 
-			PreparedStatement pstmt = con.prepareStatement("select * from board");
+			PreparedStatement pstmt = con.prepareStatement("select * from board order by no desc limit ?,?");
+			pstmt.setInt(1,  startPageNo-1);
+			pstmt.setInt(2, sizePerPage);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Board b = new Board();
@@ -61,6 +63,7 @@ public class PostDAO {
 				b.setContents(rs.getString(3));
 				list.add(b);
 			}
+		
 			con.close();
 
 		} catch (Exception ex) {
@@ -143,6 +146,32 @@ public class PostDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	public int count() {
+		int cnt = 0;
+		Connection con = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/board?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC", // DB
+					// URL
+					"root", "1234"); // USER_NAME과 PASSWORD
+
+			PreparedStatement pstmt = con.prepareStatement("select count(*) from board");
+		
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		
+			con.close();
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+		}
+		return cnt;
 	}
 
 }
