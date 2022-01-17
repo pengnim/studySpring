@@ -43,7 +43,8 @@ function 우편번호조회하다() {
 }
 
 function id중복확인(){
-	window.open("아이디중복확인창.jsp","","width=350, height=300, top=100, left=450");
+	document.querySelector("#id").value="";
+	window.open("/id","","width=350, height=300, top=100, left=450");
 }
 
 function id를받다(id){
@@ -58,14 +59,14 @@ function id를받다(id){
 </head>
 <body>
 	<h1>회원등록</h1>
-	<form action="#" method="post">
+	<form action="/member" method="post">
 		<label for="name">성명</label><input type="text" id="name" name="name"required="required"><br> 
 		<label for="tel">전화번호</label><input type="text" id="tel" name="tel" required="required"><br>
 		<label for="post">우편번호</label><input type="text" id="post" name="post" required="required" size=14><input type="button" value="찾기" onclick="우편번호조회하다()"><br>
 		<label for="address">주소</label><input type="text" id="address" name="address" required="required"><br> 
 		<label for="detailAddress">상세주소</label><input type="text" id="detailAddress" name="detailAddress" required="required"><br>
 		<label for="id">ID</label><input type="text" id="id" name="id" required="required" size=14><input type="button" id="btn" value="중복" onclick="id중복확인()"><br>
-		<label for="pw">비밀번호</label><input type="password" id="pw" name="pw" required="required"><br> 
+		<label for="pw">비밀번호</label><input type="password" id="password" name="password" required="required"><br> 
 		<label for="pwchk">비밀번호확인</label><input type="password" id="pwchk" name="pwchk" required="required"><br>
 		<label for="email">e-mail</label><input type="email" id="email" name="email" required="required"><br>
 		<input type="submit" value="등록">
