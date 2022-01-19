@@ -110,7 +110,7 @@ function 등록하다(){
 	email1 = email1.value;
 	let email2 = document.querySelector("#email2").value;
 	let email = document.querySelector("#email");
-	email.value = email1.value+"@"+email2;
+	email.value = email1+"@"+email2;
 	console.log(email);
 	return true;
 	

@@ -1,3 +1,18 @@
-기반 프로젝트: '회원관리' 프로젝트
-학습 사항: 
-회원 이미지를 추가하였다.
+기반 프로젝트:'회원관리' 프로젝트
+학습 사항:
+  회원의 이미지를 추가하였다.
+  1/17현재
+   -회원등록창jsp에
+          프로필 <img id="profile" src="/img/no_image.jpg"/><br>
+     <input type="file" name="profile" id="profilefile"/><br> 추가
+   -mvcConfig에
+      @Override
+	  public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+	      registry.addResourceHandler("/img/**").addResourceLocations("/img/");
+	  }
+	   추가됨  
+	- webapp하위 폴더로
+	  img 폴더 추가
+
+db명:db2 
+<Context docBase="회원관리(+회원프로필사진)" path="/" reloadable="true" source="org.eclipse.jst.jee.server:회원관리(+회원프로필사진)"/>    
