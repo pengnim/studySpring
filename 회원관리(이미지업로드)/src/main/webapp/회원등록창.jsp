@@ -124,7 +124,7 @@ function 등록하다(){
 	<form action="/member" enctype="multipart/form-data" method="post" onsubmit="return 등록하다()">
 		<label for="name">*성명</label><input type="text" id="name" name="name" required="required"><br> 
 		<label for="profile">프로필</label><img src="/img/no_img.png" id="profile" width=100 height=100/><br>
-		<input type="file" name="profile" id="profile_file"><br> 		
+		<input type="file" name="profileFile" id="profile_file"><br> 		
 		<label for="tel">*전화번호</label><input type="text" id="tel" name="tel" required="required"><br>
 		<label for="post">*우편번호</label><input type="text" id="post" name="post" required="required" size=14 readonly="readonly"><input type="button" value="찾기" onclick="우편번호조회하다()"><br>
 		<label for="address">*주소</label><input type="text" id="address" name="address" required="required"><br> 

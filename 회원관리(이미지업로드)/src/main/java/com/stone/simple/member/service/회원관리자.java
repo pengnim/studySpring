@@ -18,4 +18,8 @@ public class 회원관리자 {
 	public void 회원등록하다(Member 새회원) {
 		회원DAO.저장하다(새회원);
 	}
+	
+	public Member 회원정보를조회하다(int no) {
+		return 회원DAO.찾기By번호(no);
+	}
 }

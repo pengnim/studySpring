@@ -6,7 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Member {
 	int no;
-	MultipartFile profile; //spring에서 제공하는 파일타입
+	MultipartFile profileFile; //spring에서 제공하는 파일타입, 업로드된 파일 매칭용
+	byte[] profile; //실제파일, 데이터용도
 	String name;
 	String tel;
 	String post;
@@ -29,10 +30,23 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public MultipartFile getProfile() {
+	
+	public MultipartFile getProfileFile() {
+		return profileFile;
+	}
+	public void setProfileFile(MultipartFile profileFile) {
+		this.profileFile = profileFile;
+	}
+	public byte[] getProfile() {
+		try {
+			if(profileFile!=null && profile==null) {
+				//업로드된  파일로부터 데이터만 추출
+				profile = profileFile.getBytes();
+			}
+		}catch(Exception ex) {ex.printStackTrace();}
 		return profile;
 	}
-	public void setProfile(MultipartFile profile) {
+	public void setProfile(byte[] profile) {
 		this.profile = profile;
 	}
 	public String getTel() {

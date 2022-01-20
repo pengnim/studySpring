@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,31 +46,44 @@ public class 회원컨트롤러 {
 
 	// 업로드에서 multipart가 있는 경우 @ModelAttribute사용해야함
 	// 실행하면 오류가 뜰건데 탐색기에 가서 해당하는 위치에 upload폴더를 만들어준다
+	//Member 새회원, HttpServletRequest request
 	@PostMapping("/member")
-	public ModelAndView 회원등록하다(Member 새회원, HttpServletRequest request) {
+	public ModelAndView 회원등록하다(Member 새회원) {
 
 		//		 파일에 저장함(대용량 가능), 경로 고정된 점 아쉬움
 		//		  저장처리를 컨트롤이 직접한다는게 아쉬움 -> DAO로 넘기기
 		//		  스레드 걸어서 파일처리해서 빨리 이 부분을 지나쳐야함.
 
+//
+//		try {
+//			// 서버의 경로을 실시간으로 알아오기
+//			String  절대경로 =request.getSession().getServletContext().getRealPath("/");
+//			System.out.println(절대경로);
+//			
+//			//경로에 파일 저장
+//			MultipartFile 프로필파일 =새회원.getProfileFile();
+//			String 파일명= 프로필파일.getOriginalFilename();			
+//			File 파일=new File(절대경로+"\\"+파일명);
+//			프로필파일.transferTo(파일);//파일 저장
+//		}
+//		catch(Exception ex) {ex.printStackTrace();}
 
-		try {
-			// 서버의 경로을 실시간으로 알아오기
-			String  절대경로 =request.getSession().getServletContext().getRealPath("/");
-			System.out.println(절대경로);
-			
-			//경로에 파일 저장
-			MultipartFile 프로필파일 =새회원.getProfile();
-			String 파일명= 프로필파일.getOriginalFilename();			
-			File 파일=new File(절대경로+"\\"+파일명);
-			프로필파일.transferTo(파일);//파일 저장
-		}
-		catch(Exception ex) {ex.printStackTrace();}
-
-		// 회원관리자.회원등록하다(새회원);
+		회원관리자.회원등록하다(새회원);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("name", 새회원.getName());
 		mv.setViewName("회원등록알림창");
+		return mv;
+	}
+	
+	//만약 getmapping이 GetMaipping("/member/{no})라면 
+	//@PathVariable("no") int zzz 해야함 근데 int no라면 굳이 안써도됨
+	@GetMapping("/member/{no}")
+	public ModelAndView 회원조회하다(@PathVariable int no) {
+		Member 찾은회원 = 회원관리자.회원정보를조회하다(no);
+	
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("member", 찾은회원);
+		mv.setViewName("회원정보창");
 		return mv;
 	}
 
