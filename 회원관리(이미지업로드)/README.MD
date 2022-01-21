@@ -15,7 +15,7 @@ Link: [UML]
 '''java
  
 	//요청->컨트롤러에서 사진세팅->응답
-  //view에 적어주기 : <img src="data:/png;base64,${profileString }" width="200" height="300"/>
+  	//view에 적어주기 : <img src="data:/png;base64,${profileString }" width="200" height="300"//>
 	@GetMapping("/member2/{no}")
 	public ModelAndView 회원조회하다2(@PathVariable int no) {
 		Member 찾은회원 = 회원관리자.회원정보를조회하다(no);
@@ -34,7 +34,7 @@ Link: [UML]
 '''
 '''java
   //요청->프로필사진요청->컨트롤러->응답->응답 => 요청을 한번 더 하는 상황 발생
-  //조회view에 적어주기 : <img src="/profile/${member.no}" width="200" height="300"/>
+  //조회view에 적어주기 : <img src="/profile/${member.no}" width="200" height="300"//>
 
   //컨트롤러
   @GetMapping("/profile/{회원번호}")
