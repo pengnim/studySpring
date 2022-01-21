@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.stone.simple.member.common.Member;
 import com.stone.simple.member.service.회원관리자;
 
+import net.iharder.Base64;
+
 @Controller
 public class 회원컨트롤러 {
 
@@ -45,15 +47,15 @@ public class 회원컨트롤러 {
 	}
 
 	// 업로드에서 multipart가 있는 경우 @ModelAttribute사용해야함
-	// 실행하면 오류가 뜰건데 탐색기에 가서 해당하는 위치에 upload폴더를 만들어준다
 	//Member 새회원, HttpServletRequest request
 	@PostMapping("/member")
-	public ModelAndView 회원등록하다(Member 새회원) {
+	public ModelAndView 회원등록하다(Member 새회원, HttpServletRequest request) {
 
 		//		 파일에 저장함(대용량 가능), 경로 고정된 점 아쉬움
 		//		  저장처리를 컨트롤이 직접한다는게 아쉬움 -> DAO로 넘기기
 		//		  스레드 걸어서 파일처리해서 빨리 이 부분을 지나쳐야함.
-
+		// 실행하면 오류가 뜰건데 탐색기에 가서 해당하는 위치에 upload폴더를 만들어준다
+//		pom.xml설정 필요
 //
 //		try {
 //			// 서버의 경로을 실시간으로 알아오기
@@ -84,6 +86,22 @@ public class 회원컨트롤러 {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("member", 찾은회원);
 		mv.setViewName("회원정보창");
+		return mv;
+	}
+	
+	//html에서 바로 사진 뿌려주기
+	//기존 : 요청->프로필사진요청->컨트롤러->응답->응답 순
+	//지금 : 요청->컨트롤러에서 사진세팅->응답
+	@GetMapping("/member2/{no}")
+	public ModelAndView 회원조회하다2(@PathVariable int no) {
+		Member 찾은회원 = 회원관리자.회원정보를조회하다(no);
+	
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("member", 찾은회원);
+		//base64별도 라이브러리 사용해야함. 바이트코드를 스트링으로 인코딩해줌. pom.xml에서 의존성주입
+		String 프로필사진문자열 = Base64.encodeBytes(찾은회원.getProfile());
+		mv.addObject("profileString",프로필사진문자열);
+		mv.setViewName("회원정보창2");
 		return mv;
 	}
 

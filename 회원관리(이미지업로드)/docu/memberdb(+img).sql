@@ -20,7 +20,7 @@ USE `memberdb2` ;
 CREATE TABLE IF NOT EXISTS `memberdb2`.`member` (
   `no` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(20) NULL,
-  `profile` BLOB,
+  `profile` LONGBLOB NULL,
   `tel` VARCHAR(20) NULL,
   `post` CHAR(5) NULL,
   `address` VARCHAR(45) NULL,

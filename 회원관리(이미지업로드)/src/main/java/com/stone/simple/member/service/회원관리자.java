@@ -20,6 +20,6 @@ public class 회원관리자 {
 	}
 	
 	public Member 회원정보를조회하다(int no) {
-		return 회원DAO.찾기By번호(no);
+		return 회원DAO.찾다By번호(no);
 	}
 }

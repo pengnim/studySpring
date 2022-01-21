@@ -1,10 +1,10 @@
 package com.stone.simple.member.dataservice;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Date;
 
 import org.springframework.stereotype.Repository;
 
@@ -25,15 +25,12 @@ public class 회원DAO {
 	        ResultSet 아이디갯수표 =명령자.executeQuery();
 	        if(아이디갯수표.next()) {
 	        	if(아이디갯수표.getInt(1)>0) {아이디있다=true;}
-	        	System.out.println("DB확인");//@MyTest
 	        } 
 	       con.close();
 	   }
 	   catch(Exception ex){ ex.printStackTrace(); }
-	    System.out.println(아이디있다);//@MyTest
 		return 아이디있다;
 	} 
-	
 	public void 저장하다(Member 새회원) {
 		Connection con = null;		 
 	    try{
@@ -53,10 +50,9 @@ public class 회원DAO {
 	        명령자.executeUpdate();	         
 	       con.close();
 	   }
-	   catch(Exception ex){ ex.printStackTrace(); }	
+	   catch(Exception ex){ ex.printStackTrace(); }		
 	}
-	
-	public Member 찾기By번호(int no) {
+	public Member 찾다By번호(int no) {
 		Member 찾은회원 = null;
 		Connection con = null;		 
 	    try{
@@ -66,7 +62,6 @@ public class 회원DAO {
 	        명령자.setInt(1, no);
 	        ResultSet 회원표 =명령자.executeQuery();
 	        if(회원표.next()) {
-	       
 	        	String name = 회원표.getString("name");
 	        	byte[] profile=회원표.getBytes("profile");
 	        	String tel = 회원표.getString("tel");
@@ -75,7 +70,6 @@ public class 회원DAO {
 	        	String detailAddress = 회원표.getString("detailAddress");
 	        	String id = 회원표.getString("id");
 	        	String email = 회원표.getString("email");
-	        	char state = 회원표.getString("state").charAt(0);
 	        	Date rdate = 회원표.getDate("rdate");
 	        	
 	        	찾은회원 = new Member();
@@ -84,11 +78,9 @@ public class 회원DAO {
 	        	찾은회원.setProfile(profile);
 	        	찾은회원.setTel(tel);
 	        	찾은회원.setPost(post);
-	        	찾은회원.setAddress(address);
 	        	찾은회원.setDetailAddress(detailAddress);
 	        	찾은회원.setId(id);
 	        	찾은회원.setEmail(email);
-	        	찾은회원.setState(state);
 	        	찾은회원.setRdate(rdate);	        	
 	        } 
 	        회원표.close();	        
