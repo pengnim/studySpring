@@ -12,10 +12,10 @@
 Link: [UML]
 
 ### 이미지를 출력하는 2가지 방법
-'''java
+```java
  
 	//요청->컨트롤러에서 사진세팅->응답
-  	//view에 적어주기 : <img src="data:/png;base64,${profileString }" width="200" height="300"//>
+  	//view에 적어주기 : <img src="data:/png;base64,${profileString }" width="200" height="300"/>
 	@GetMapping("/member2/{no}")
 	public ModelAndView 회원조회하다2(@PathVariable int no) {
 		Member 찾은회원 = 회원관리자.회원정보를조회하다(no);
@@ -28,13 +28,10 @@ Link: [UML]
 		mv.setViewName("회원정보창2");
 		return mv;
 	}
-  
-  
-  
-'''
-'''java
+```
+```java
   //요청->프로필사진요청->컨트롤러->응답->응답 => 요청을 한번 더 하는 상황 발생
-  //조회view에 적어주기 : <img src="/profile/${member.no}" width="200" height="300"//>
+  //조회view에 적어주기 : <img src="/profile/${member.no}" width="200" height="300"/>
 
   //컨트롤러
   @GetMapping("/profile/{회원번호}")
@@ -56,7 +53,7 @@ Link: [UML]
    ServletOutputStream 배송자= response.getOutputStream();
       배송자.write(프로필);
 %>
-'''
+```
 
 [UML]: https://github.com/pengnim/studySpring/tree/main/%ED%9A%8C%EC%9B%90%EA%B4%80%EB%A6%AC(%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%85%EB%A1%9C%EB%93%9C)/docu
 ### 간단한 회원가입기능
