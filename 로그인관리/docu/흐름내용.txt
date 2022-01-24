@@ -1,0 +1,34 @@
+1.pom.xml에 의존성 주입 필수
+2.web.xml에 session시간 설정하기 (따로안해도됨), 기본 설정하기
+3.
+
+
+/login 요청
+1. 로그인 성공
+	1.1. /main 요청
+2. 로그인 실패
+	2.1. /login 다시
+
+/main 요청
+1. 로그인(세션)이 됨
+	1.1. main.jsp 자기정보(/member), 로그아웃(/logOut) 버튼 출력
+2. 로그인(세션 없음)이 안됨
+	2.1. main.jsp 로그인(/login) 버튼 출력 
+
+/member 요청
+1. MvcConfig에서 인터셉터 : 로그인확인자
+	1.1. 로그인확인자 : 세션 여부 확인
+		1.1.1. 세션 존재 -> /member return true
+		1.1.2. 세션 없음 -> /member 말고 /login수행, return false
+	1.2. 인터셉터 결과에 따라 페이지 이동
+
+/logOut 요청
+1. MvcConfig에서 인터셉터 : 로그인확인자
+	1.1. 로그인확인자 : 세션 여부 확인
+		1.1.1. 세션 존재 -> /logOut return true
+		1.1.2. 세션 없음 -> /logOut 말고 /login수행, return false
+	1.2. 인터셉터 결과에 따라 행동, /logOut시 세션이 존재하면 invalidate
+
+
+/login -> 로그아웃업무자 -> 로그인창 -> id,pw가지고 /login -> 로그아웃 업무자
+-> 회원업무자 -> 회원DAO -> /main 

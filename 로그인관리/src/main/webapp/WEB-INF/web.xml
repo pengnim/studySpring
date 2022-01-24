@@ -24,7 +24,9 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+	<session-config>
+		<session-timeout>20</session-timeout> <!--분 단위 -->
+	</session-config>
 
 
 </web-app>
