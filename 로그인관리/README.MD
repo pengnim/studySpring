@@ -20,7 +20,8 @@ Link: [click]
 		        .excludePathPatterns("/login");		
 		//Test 할 것 -로그인 없이 /member 요청하면 -> 로그인 창이 뜨며 로그인을 요청함  
 	}
-  
+```
+```
   //로그인확인자.java
   public class 로그인확인자 extends HandlerInterceptorAdapter {
 	@Override
