@@ -5,10 +5,7 @@
 - 2022.01.21 로그인기능 전체적인 흐름 작성
 - 2022.01.24 로그인 정보를 받아와 DB를 확인하고 ID세션 생성, 로그인을 했을 경우에만 갈 수 있는 페이지 생성 기능 추가
 
-#### 자세한 흐름은 uml, 흐름내용.txt를 참조해주세요
-Link: [click]
-[click]: https://github.com/pengnim/studySpring/tree/main/%EB%A1%9C%EA%B7%B8%EC%9D%B8%EA%B4%80%EB%A6%AC/docu
-
+#### 자세한 흐름은 [uml, 흐름내용.txt]를 참조해주세요
 ### 인터셉터 부분
 ```java
 //MvcConfig.java일부
@@ -49,3 +46,4 @@ Link: [click]
 }
 
 ```
+[uml, 흐름내용.txt]: https://github.com/pengnim/studySpring/tree/main/%EB%A1%9C%EA%B7%B8%EC%9D%B8%EA%B4%80%EB%A6%AC/docu
