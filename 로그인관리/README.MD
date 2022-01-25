@@ -46,4 +46,10 @@
 }
 
 ```
+
+### 기능 동작
+
+![login](https://user-images.githubusercontent.com/90567066/150940120-8abca1f3-a54d-4d0b-928c-7a9dd23644b5.gif)
+
+
 [uml, 흐름내용.txt]: https://github.com/pengnim/studySpring/tree/main/%EB%A1%9C%EA%B7%B8%EC%9D%B8%EA%B4%80%EB%A6%AC/docu
