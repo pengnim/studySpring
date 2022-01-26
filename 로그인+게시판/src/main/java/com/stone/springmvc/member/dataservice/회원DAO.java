@@ -12,7 +12,7 @@ import com.stone.springmvc.member.common.Member;
 import config.DBConfig;
 
 @Repository
-public class 회원DAO {
+public class 회원DAO implements I회원DAO{
 	/*
 	public boolean 있는가(String id, String password) {
 		boolean 있다=  false;
@@ -36,6 +36,7 @@ public class 회원DAO {
 	    return 있다;
 	}
 	*/
+	@Override
 	public Member 찾다ById와Password(String id, String password) {
 	
 	    Member 찾은회원=null; 
@@ -59,6 +60,31 @@ public class 회원DAO {
 	   }
 	   catch(Exception ex){ ex.printStackTrace(); }
 		return 찾은회원;
+	}
+	
+	@Override
+	public Member 찾다By회원번호(int no) {
+		Connection con = null;
+		Member member = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con=DriverManager.getConnection(DBConfig.DBURL, DBConfig.ID, DBConfig.PASSWORD);
+			PreparedStatement pstmt = con.prepareStatement("select no, name, id from member where no=?");
+			pstmt.setInt(1, no);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				member = new Member();
+				member.setNo(rs.getInt(1));
+				member.setName(rs.getString(2));
+				member.setId(rs.getString(3));
+			
+			}
+			rs.close();
+			con.close();
+		}catch(Exception e) {
+			
+		}
+		return member;
 	}
 
 }

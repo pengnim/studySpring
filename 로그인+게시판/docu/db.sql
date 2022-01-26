@@ -51,3 +51,7 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 insert into db5.member(name, id, password) values("name", "id1","p1");
+
+alter table db5.board add views int;
+insert into db5.member(name, id, password) values("name2", "id2","p2");
+

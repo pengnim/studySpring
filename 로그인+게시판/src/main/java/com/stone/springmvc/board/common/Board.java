@@ -7,6 +7,7 @@ public class Board {
 	String title;
 	String contents;
 	Member writer;
+	int views;
 	public int getNo() {
 		return no;
 	}
@@ -31,4 +32,11 @@ public class Board {
 	public void setWriter(Member writer) {
 		this.writer = writer;
 	}
+	public int getViews() {
+		return views;
+	}
+	public void setViews(int views) {
+		this.views = views;
+	}
+	
 }

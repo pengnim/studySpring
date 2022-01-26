@@ -13,6 +13,8 @@ public class 로그인확인자 extends HandlerInterceptorAdapter {
 			                 Object handler)throws Exception {
 		//요청이  컨트롤러 닿기전이다.
 		//이때 로그인 여부를 확인하자
+		//request.getSession(), request.getSession(true) = 세션이 없으면 새로운 세션을 생성해서 리턴
+		//request.getSession(false) = 세션의 존재여부 확인, 있으면 해당세션 리턴 없으면 null
 		HttpSession session = request.getSession(false);
 		boolean 로그인중 =false;
 		//만약 로그인되었다면

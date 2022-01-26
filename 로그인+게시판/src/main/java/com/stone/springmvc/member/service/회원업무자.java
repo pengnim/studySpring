@@ -8,7 +8,7 @@ import com.stone.springmvc.member.dataservice.*;
 
 @Service
 public class 회원업무자 {
-	@Autowired 회원DAO 회원DAO; 
+	@Autowired I회원DAO 회원DAO; 
 	
 	/*
 	public boolean  있는가(String id, String  password) {

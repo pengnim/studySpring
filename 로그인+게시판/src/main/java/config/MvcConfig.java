@@ -25,7 +25,9 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addInterceptor(new 로그인확인자())
 		        .addPathPatterns("/**") //모든 패턴 확인
 		        .excludePathPatterns("/main") // 단 /main, /login은 제외
-		        .excludePathPatterns("/login");		
+		        .excludePathPatterns("/login")
+		        .excludePathPatterns("/boards");
+			
 		//Test 할 것 -로그인 없이 /member 요청하면 -> 로그인 창이 뜨며 로그인을 요청함  
 		
 	}

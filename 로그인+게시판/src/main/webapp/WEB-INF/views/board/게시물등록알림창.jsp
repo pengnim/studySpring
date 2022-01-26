@@ -8,7 +8,9 @@
 </head>
 <body>
 <p>게시물이 등록되었습니다.</p>
+<form action="/boards" method="get">
+<input type="submit" value="목록으로">
+</form>
 
-<button>확인</button>
 </body>
 </html>
