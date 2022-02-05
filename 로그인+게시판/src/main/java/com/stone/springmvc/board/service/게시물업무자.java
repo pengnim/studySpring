@@ -35,4 +35,20 @@ public class 게시물업무자 implements I게시물업무자 {
 		
 		return 게시물DAO.게시물을조회하다And조회수증가하다(게시물번호);
 	}
+
+	@Override
+	public void 게시물수정하다(Board 수정한게시물) {
+		게시물DAO.게시물수정하다(수정한게시물);
+	}
+
+	@Override
+	public Board 게시물수정을준비하다(int 게시물번호) {
+		return 게시물DAO.게시물조회하다(게시물번호);
+	}
+
+	@Override
+	public void 게시물삭제하다(int 게시물번호) {
+		게시물DAO.게시물삭제하다(게시물번호);
+		
+	}
 }

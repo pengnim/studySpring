@@ -20,8 +20,8 @@
 <%
 	if(isWriter != null && isWriter){
 		%>
-		<a href="#">수정</a>
-		<a href="#">삭제</a>
+		<a href="/board/modify/<%= board.getNo()%>">수정</a>
+		<a href="/board/remove/<%= board.getNo()%>">삭제</a>
 		<% 
 	}
 %>

@@ -101,4 +101,66 @@ public class 게시물DAO implements I게시물DAO {
 		return b;
 	}
 
+	public Board 게시물조회하다(int 게시물번호) {
+		Connection con = null;
+		Board b = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection(DBConfig.DBURL, DBConfig.ID, DBConfig.PASSWORD);
+			
+			//조회할 게시물 정보
+			PreparedStatement pstmt2 = con.prepareStatement("select no, title, contents, writer, views from board where no=?");
+			pstmt2.setInt(1, 게시물번호);
+			ResultSet rs = pstmt2.executeQuery();
+			while(rs.next()) {
+				b = new Board();
+				b.setNo(rs.getInt(1));
+				b.setTitle(rs.getString(2));
+				b.setContents(rs.getString(3));
+				Member member = 회원DAO.찾다By회원번호(rs.getInt(4));
+				b.setWriter(member);
+				b.setViews(rs.getInt(5));
+			}
+
+		} catch (Exception e) {
+
+		}
+		return b;
+		
+	}
+	@Override
+	public void 게시물수정하다(Board 수정한게시물) {
+		Connection con = null;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection(DBConfig.DBURL, DBConfig.ID, DBConfig.PASSWORD);
+			
+			//조회할 게시물 정보
+			PreparedStatement pstmt = con.prepareStatement("update board set title=?, contents=? where no=?");
+			pstmt.setString(1, 수정한게시물.getTitle());
+			pstmt.setString(2, 수정한게시물.getContents());
+			pstmt.setInt(3, 수정한게시물.getNo());
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+
+		}
+	}
+
+	@Override
+	public void 게시물삭제하다(int 게시물번호) {
+		Connection con = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection(DBConfig.DBURL, DBConfig.ID, DBConfig.PASSWORD);
+
+			PreparedStatement pstmt = con.prepareStatement("delete from board where no=?");
+			pstmt.setInt(1, 게시물번호);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("err");
+		}
+	}
+
 }

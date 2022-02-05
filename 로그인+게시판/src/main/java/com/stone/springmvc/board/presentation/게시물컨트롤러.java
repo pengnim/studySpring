@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.stone.springmvc.board.common.Board;
@@ -42,7 +44,7 @@ public class 게시물컨트롤러 {
 		return "board/게시물등록알림창";
 	}
 	
-	@GetMapping("/boards")
+	@RequestMapping("/boards")
 	public ModelAndView 게시물목록을출력하다() {
 		List<Board> boards = 게시물업무자.모든게시물을수집하다();
 		if(boards.size() == 0 || boards == null)
@@ -75,5 +77,35 @@ public class 게시물컨트롤러 {
 		mv.setViewName("board/게시물상세창");
 		return mv;
 	}
+	
+	//게시물수정준비
+	@GetMapping("/board/modify/{no}")
+	ModelAndView 게시물수정을준비하다(@PathVariable int no) {
+		//게시물 조회 => 해당 내용 return
+		Board b = 게시물업무자.게시물수정을준비하다(no);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("board",b);
+		mv.setViewName("board/게시물수정창");
+		return mv;
+		
+	}
+	
+	@PostMapping("/board/modify")
+	String 게시물을수정하다(Board 수정한게시물) {
+		//게시물 업데이트하기
+		게시물업무자.게시물수정하다(수정한게시물);
+		//업데이트하고 게시물 리스트로 넘기기
+		return "forward://boards";
+	}
+	//게시물삭제
+	@GetMapping("/board/remove/{no}")
+	String 게시물삭제(@PathVariable int no) {
+		게시물업무자.게시물삭제하다(no);
+		return "board/게시물삭제완료창";
+	}
+	
+	
+	
+	
 
 }
